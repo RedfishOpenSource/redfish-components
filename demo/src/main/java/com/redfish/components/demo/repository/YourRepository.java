@@ -16,7 +16,7 @@ public class YourRepository {
 
     public void yourDatabaseOperation() {
         // 使用jdbcTemplate进行数据库操作
-        jdbcTemplate.update("INSERT INTO your_table (column1, column2) VALUES (?, ?)",
+        jdbcTemplate.update("INSERT INTO your_table (code, name) VALUES (?, ?)",
                 ps -> {
                     ps.setString(1, "value1");
                     ps.setString(2, "value2");
