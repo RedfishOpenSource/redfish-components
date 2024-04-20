@@ -1,0 +1,2 @@
+中间件相关接口实现
+如DistributedLock、ConfigClient、CacheClient等。
