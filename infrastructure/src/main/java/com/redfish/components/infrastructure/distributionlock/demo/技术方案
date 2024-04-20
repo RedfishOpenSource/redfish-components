@@ -1,0 +1,64 @@
+package com.redfish.components.infrastructure.distributionlock;
+
+
+
+import com.redfish.components.common.distributionlock.DistributeLockGetter;
+
+import javax.annotation.Resource;
+import java.util.concurrent.locks.Lock;
+
+
+public class RedisDistributeLockGetter implements DistributeLockGetter {
+
+    @Resource
+    private RedisTemplateJedisClient redisClient;
+
+
+    @Override
+    public Lock getLock(String resourceTag) {
+        return null;
+    }
+
+
+
+    // region 实现方案一
+    /**
+     *  获取锁
+     *  SET命令是原子性操作，NX指令保证只要当key不存在时才会设置value，保证只有一个请求能获取锁成功。
+     *  lockValue保证唯一性，每次得值都不同，如系统时间戳+UUID。
+     *  redis得setNx执行返回OK时，客户端获取锁成功，否则失败。
+     *
+     *  释放锁
+     *  1，客户端可以通过redis释放脚本来释放锁。
+     * 只有当value相等才释放，避免被其他请求或其他代码释放掉。
+     * 2，如果锁到达了最大生存时间将会自动释放。
+     *
+     * 由于lockValue的唯一性，当前请求lock的数据，只有根据当前请求生成的唯一lockValue才可以释放。
+     * 避免其他地方代码编码不当导致锁被误释放。
+     * 这也是相对于，直接使用:del key进行释放锁的优势。
+     *
+     * 本方案的代码设计不够规范，参考redission设计。
+     * lock和unlock应该面向Lock对象，每一个Lock对象都对应唯一一个资源。
+     * 1，getLock("资源唯一标识")获取唯一资源对应的Lock对象。
+     * 2，lock.Lock();获取锁。
+     * 3，lock.release()，释放锁。
+     * 基于这种设计，在Lock对象中存储和处理lockValue(唯一值)，基于lockValue释放锁，避免被其他请求或其他代码释放掉。
+     * 因此，用户仅仅关注“资源唯一标识”，和对应的Lock对象即可。
+     *
+     */
+
+    public Boolean lockKey(String lockKey, String lockValue,long lockTimeout) {
+        //添加锁
+        Boolean res = redisClient.setNx(lockKey, lockKey,lockTimeout);
+        return res;
+    }
+
+
+    public Boolean unlockKey(String lockKey,String lockValue) {
+        return redisClient.delIfValueSame(lockKey,lockValue);
+    }
+
+
+    // endregion 实现方案一
+
+}

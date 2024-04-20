@@ -11,7 +11,7 @@
     </parent>
 
 
-    <artifactId>middleware</artifactId>
+    <artifactId>common</artifactId>
     <packaging>jar</packaging>
 
 

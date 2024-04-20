@@ -18,8 +18,9 @@
     </properties>
 
     <modules>
-        <module>middleware</module>
-        <module>middlewareimpl</module>
+        <module>common</module>
+        <module>infrastructure</module>
+        <module>demo</module>
     </modules>
 
 
@@ -28,14 +29,23 @@
             <!--Project modules-->
             <dependency>
                 <groupId>com.redfish.components</groupId>
-                <artifactId>middleware</artifactId>
+                <artifactId>common</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>com.redfish.components</groupId>
-                <artifactId>middlewareimpl</artifactId>
+                <artifactId>infrastructure</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.redfish.components</groupId>
+                <artifactId>demo</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+
 
 
             <!-- pom -->
