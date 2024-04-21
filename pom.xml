@@ -170,6 +170,12 @@
                 <version>1.5.5.Final</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.reflections</groupId>
+                <artifactId>reflections</artifactId>
+                <version>0.10.2</version>
+            </dependency>
+
             <!--    工具包  end     -->
 
             <dependency>
