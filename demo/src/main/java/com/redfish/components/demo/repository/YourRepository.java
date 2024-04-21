@@ -18,8 +18,8 @@ public class YourRepository {
         // 使用jdbcTemplate进行数据库操作
         jdbcTemplate.update("INSERT INTO your_table (code, name) VALUES (?, ?)",
                 ps -> {
-                    ps.setString(1, "value1");
-                    ps.setString(2, "value2");
+                    ps.setString(1, "123");
+                    ps.setString(2, "456");
                 });
 
     }
