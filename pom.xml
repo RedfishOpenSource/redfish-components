@@ -20,7 +20,7 @@
     <modules>
         <module>common</module>
         <module>infrastructure</module>
-        <module>demo</module>
+        <module>aksk</module>
     </modules>
 
 
@@ -41,7 +41,7 @@
 
             <dependency>
                 <groupId>com.redfish.components</groupId>
-                <artifactId>demo</artifactId>
+                <artifactId>aksk</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
