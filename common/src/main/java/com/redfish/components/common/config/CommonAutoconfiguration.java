@@ -2,7 +2,7 @@ package com.redfish.components.common.config;
 
 import com.redfish.components.common.eventpublisher.CustomApplicationEventMulticaster;
 import com.redfish.components.common.eventpublisher.CustomizableThreadFactory;
-import com.redfish.components.common.juc.ThreadPoolBuilder;
+import com.redfish.components.juc.tp.enhancer.ThreadPoolBuilder;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

@@ -1,11 +1,6 @@
 package com.redfish.components.common.eventpublisher;
 
 
-
-import com.redfish.components.common.juc.ThreadPoolBuilder;
-
-import java.util.concurrent.*;
-
 public abstract class EventPublisher {
 
     final void publish(BaseDomainEvent event){

@@ -1,10 +1,6 @@
 package com.redfish.components.common.eventpublisher;
 
-import com.redfish.components.common.juc.ThreadPoolBuilder;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -15,7 +11,6 @@ import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.core.ResolvableType;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.concurrent.*;
 
 @Component(AbstractApplicationContext.APPLICATION_EVENT_MULTICASTER_BEAN_NAME)

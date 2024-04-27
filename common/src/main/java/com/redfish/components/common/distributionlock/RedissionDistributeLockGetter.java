@@ -1,4 +1,4 @@
-package com.redfish.components.infrastructure.distributionlock;
+package com.redfish.components.common.distributionlock;
 
 
 import com.redfish.components.common.distributionlock.DistributeLockGetter;
