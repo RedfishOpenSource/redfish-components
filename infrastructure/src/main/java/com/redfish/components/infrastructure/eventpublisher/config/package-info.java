@@ -1,1 +1,0 @@
-package com.redfish.components.infrastructure.eventpublisher.config;

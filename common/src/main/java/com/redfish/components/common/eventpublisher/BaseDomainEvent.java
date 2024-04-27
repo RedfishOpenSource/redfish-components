@@ -1,5 +1,9 @@
 package com.redfish.components.common.eventpublisher;
 
+import org.springframework.context.ApplicationEvent;
+import org.springframework.context.PayloadApplicationEvent;
+import org.springframework.util.StringUtils;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -13,35 +17,30 @@ import java.time.LocalDateTime;
  *
  * 相关属性仅提供get方法，事件一旦通过Builder创建后，即不可更改。
  *
- * @param <T>
  */
-public class BaseDomainEvent<T> implements Serializable {
+public class BaseDomainEvent<T> extends PayloadApplicationEvent<T> {
 
 
     /**
-     * 事件类型
+     * 事件类型。默认同步事件
      */
-    private EventTypeEnum type;
+    private EventTypeEnum type = EventTypeEnum.LOCAL_SYNC_EVENT;
 
     /**
      * 幂等键。消息唯一标识。
      */
     private String idempotentKey;
 
-    /**
-     * 事件信息数据。
-     */
-    private T data;
 
-    /**
-     * 领域事件的创建时间（用于事件日志记录）。
-     */
-    private LocalDateTime createAt;
 
     /**
      * 事件触发者（用于事件日志记录）。
      */
     private String creator;
+
+    private BaseDomainEvent(Object source,T payLoad) {
+        super(source,payLoad);
+    }
 
 
     public EventTypeEnum getType() {
@@ -52,15 +51,61 @@ public class BaseDomainEvent<T> implements Serializable {
         return idempotentKey;
     }
 
-    public T getData() {
-        return data;
-    }
-
-    public LocalDateTime getCreateAt() {
-        return createAt;
-    }
-
     public String getCreator() {
         return creator;
     }
+
+    public static class Builder<T> {
+        private EventTypeEnum type;
+        private String idempotentKey;
+        private T payLoad;
+        private String creator;
+        private Object source;
+
+        public Builder(Object source) {
+            this.source = source;
+        }
+
+        public Builder<T> withType(EventTypeEnum type) {
+            this.type = type;
+            return this;
+        }
+
+        public Builder<T> withIdempotentKey(String idempotentKey) {
+            this.idempotentKey = idempotentKey;
+            return this;
+        }
+
+        public Builder<T> withPayLoad(T payLoad) {
+            this.payLoad = payLoad;
+            return this;
+        }
+
+        public BaseDomainEvent<T> build() {
+            if (null == this.type){
+                this.type = EventTypeEnum.LOCAL_SYNC_EVENT;
+            }
+            if (this.idempotentKey == null){
+                throw new RuntimeException("idempotentKey can not be null");
+            }
+            if (this.payLoad == null){
+                throw new RuntimeException("payLoad can not be null");
+            }
+            if (!StringUtils.hasText(this.creator)){
+                throw new RuntimeException("creator can not be null");
+            }
+            if (this.source == null){
+                throw new RuntimeException("event source can not be null");
+            }
+
+            BaseDomainEvent event = new BaseDomainEvent(this.source,this.payLoad);
+            event.type = this.type;
+            event.idempotentKey = this.idempotentKey;
+            event.creator = this.creator;
+            return event;
+
+        }
+    }
+
+
 }

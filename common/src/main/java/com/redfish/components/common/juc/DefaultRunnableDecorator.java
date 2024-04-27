@@ -1,12 +1,11 @@
-package com.redfish.components.infrastructure.juc;
+package com.redfish.components.common.juc;
 
-/**
- * Runable上下文装饰器
- */
-public class RunnableDecorator {
+import java.util.Map;
 
-    public static Runnable decorate(Runnable runnable) {
-        if (runnable == null || runnable instanceof RunableProxy) {
+public class DefaultRunnableDecorator implements RunnableDecorator{
+
+    public Runnable get(Runnable runnable) {
+        if (runnable == null || runnable instanceof DefaultRunnableDecorator) {
             return runnable;
         }
 
@@ -21,31 +20,28 @@ public class RunnableDecorator {
         private final long MAIN_THREAD_ID = Thread.currentThread().getId();
 
         // region 传递给异步线程的ThreadLocal对象
-
+        Map<ThreadLocal,Object> allThreadLocalMap = ThreadLocalTransfer.getAllContext();
 
         // endregion
 
         public RunableProxy(Runnable target) {
             this.target = target;
-
-            // 对传递的ThreadLocal对象初始化
-            initThreadLocalVariable();
         }
 
-        private void initThreadLocalVariable() {
-        }
 
 
         /**
          * 异步线程ThreadLocal初始化
          */
         private void initContext() {
+            ThreadLocalTransfer.initContext(allThreadLocalMap);
         }
 
         /**
          * 异步线程ThreadLocal变量clear
          */
         private void clearContext() {
+            ThreadLocalTransfer.clearContext(allThreadLocalMap);
         }
 
         @Override
@@ -65,6 +61,5 @@ public class RunnableDecorator {
 
 
     }
-
 
 }

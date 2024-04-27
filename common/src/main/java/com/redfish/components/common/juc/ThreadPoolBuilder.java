@@ -67,6 +67,13 @@ public class ThreadPoolBuilder {
     }
 
     public ExecutorService build(){
+        if (this.rejectedExecutionHandler == null){
+            this.rejectedExecutionHandler = new ThreadPoolExecutor.CallerRunsPolicy();
+        }
+        if (this.workQueue == null){
+            this.workQueue = new LinkedBlockingQueue<>();
+        }
+
         ThreadPoolExecutor threadPool = new ThreadPoolExecutor(this.corePoolSize,this.maximumPoolSize,this.keepAliveTime, this.unit,
                 this.workQueue,this.threadFactory,this.rejectedExecutionHandler);
 

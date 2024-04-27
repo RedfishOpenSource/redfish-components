@@ -1,16 +1,12 @@
-package com.redfish.components.infrastructure.juc;
+package com.redfish.components.common.juc;
 
-
-
-
-import com.redfish.components.common.juc.ExecutorServiceEnhancer;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.*;
 
 
-public class ThreadLocalExecutorServiceEnhancer implements ExecutorServiceEnhancer {
+public class DefaultExecutorServiceEnhancer implements ExecutorServiceEnhancer {
 
     @Override
     public ExecutorService get(ExecutorService executorService){
