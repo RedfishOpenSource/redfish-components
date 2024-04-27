@@ -19,7 +19,6 @@
         <dependency>
             <groupId>com.redfish.components</groupId>
             <artifactId>ThreadPoolEnhancer</artifactId>
-            <version>1.0.2</version>
         </dependency>
 
 
