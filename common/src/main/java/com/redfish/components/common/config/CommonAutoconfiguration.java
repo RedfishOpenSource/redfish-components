@@ -1,8 +1,9 @@
 package com.redfish.components.common.config;
 
+import com.alibaba.ttl.threadpool.TtlExecutors;
 import com.redfish.components.common.eventpublisher.CustomApplicationEventMulticaster;
 import com.redfish.components.common.eventpublisher.CustomizableThreadFactory;
-import com.redfish.components.juc.tp.enhancer.ThreadPoolBuilder;
+
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -21,15 +22,11 @@ public class CommonAutoconfiguration {
     @ConditionalOnMissingBean(name = CustomApplicationEventMulticaster.EVENT_MULTICASTER_THREAD_POOL)
     @Bean(CustomApplicationEventMulticaster.EVENT_MULTICASTER_THREAD_POOL)
     public ExecutorService eventMulticasterThreadPool(){
-        return ThreadPoolBuilder.create()
-                .corePoolSize(10)
-                .maximumPoolSize(10)
-                .keepAliveTime(10)
-                .unit(TimeUnit.SECONDS)
-                .workQueue(new ArrayBlockingQueue<>(100))
-                .threadFactory(new CustomizableThreadFactory(CustomApplicationEventMulticaster.EVENT_MULTICASTER_THREAD_POOL))
-                .rejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy())
-                .build();
+        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(10,10,10,
+                TimeUnit.SECONDS,new ArrayBlockingQueue<>(100),
+                new CustomizableThreadFactory(CustomApplicationEventMulticaster.EVENT_MULTICASTER_THREAD_POOL),
+                new ThreadPoolExecutor.CallerRunsPolicy());
+        return TtlExecutors.getTtlExecutorService(threadPoolExecutor);
     }
 
 
