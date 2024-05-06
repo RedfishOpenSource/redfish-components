@@ -20,6 +20,7 @@
     <modules>
         <module>common</module>
         <module>aksk</module>
+        <module>script</module>
     </modules>
 
 
@@ -39,12 +40,12 @@
                 <version>${project.version}</version>
             </dependency>
 
-
             <dependency>
                 <groupId>com.redfish.components</groupId>
-                <artifactId>ThreadPoolEnhancer</artifactId>
-                <version>1.0.2</version>
+                <artifactId>script</artifactId>
+                <version>${project.version}</version>
             </dependency>
+
 
 
             <!-- pom -->

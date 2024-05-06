@@ -1,7 +1,6 @@
 package com.redfish.components.common.distributionlock;
 
 
-import com.redfish.components.common.distributionlock.DistributeLockGetter;
 import java.util.concurrent.locks.Lock;
 
 /**

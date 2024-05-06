@@ -5,12 +5,9 @@ package com.redfish.components.common.eventpublisher;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
-import org.springframework.context.event.SimpleApplicationEventMulticaster;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.support.TransactionSynchronizationAdapter;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
-import org.springframework.util.ObjectUtils;
-import org.springframework.util.StringUtils;
 
 @ConditionalOnMissingBean(EventPublisher.class)
 @Component

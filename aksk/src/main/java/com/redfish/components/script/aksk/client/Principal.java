@@ -1,4 +1,4 @@
-package com.redfish.components.aksk.client;
+package com.redfish.components.script.aksk.client;
 
 import java.io.Serializable;
 

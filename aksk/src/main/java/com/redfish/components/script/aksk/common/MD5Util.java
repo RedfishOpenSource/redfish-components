@@ -1,4 +1,4 @@
-package com.redfish.components.aksk.common;
+package com.redfish.components.script.aksk.common;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

@@ -1,4 +1,4 @@
-package com.redfish.components.aksk;
+package com.redfish.components.script.aksk;
 
 import org.junit.Test;
 import org.slf4j.Logger;
