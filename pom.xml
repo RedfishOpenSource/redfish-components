@@ -20,7 +20,6 @@
     <modules>
         <module>common</module>
         <module>aksk</module>
-        <module>script</module>
         <module>Demo</module>
     </modules>
 
@@ -163,6 +162,18 @@
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>1.18.24</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.minio</groupId>
+                <artifactId>minio</artifactId>
+                <version>7.0.2</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-quartz</artifactId>
+                <version>2.7.18</version>
             </dependency>
 
             <dependency>
