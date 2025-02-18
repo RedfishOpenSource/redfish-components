@@ -1,3 +1,21 @@
+**引入**
+
+```
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>com.redfish.components</groupId>
+            <artifactId>redfish-components-bom-parent</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+```
+
+
+
 ### 3 分钟了解如何进入开发
 
 欢迎使用 Codeup，通过阅读以下内容，你可以快速熟悉 Codeup ，并立即开始今天的工作。
