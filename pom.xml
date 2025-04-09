@@ -141,9 +141,16 @@
                 </exclusions>
             </dependency>
 
+<!--            <dependency>-->
+<!--                <groupId>org.apache.poi</groupId>-->
+<!--                <artifactId>poi</artifactId>-->
+<!--                <version>5.2.2</version>-->
+<!--                <scope>compile</scope>-->
+<!--            </dependency>-->
+<!--         apache.poi-ooxm包含apache.poi   -->
             <dependency>
                 <groupId>org.apache.poi</groupId>
-                <artifactId>poi</artifactId>
+                <artifactId>poi-ooxml</artifactId>
                 <version>5.2.2</version>
                 <scope>compile</scope>
             </dependency>
